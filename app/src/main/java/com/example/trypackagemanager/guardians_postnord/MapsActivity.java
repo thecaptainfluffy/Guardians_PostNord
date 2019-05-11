@@ -1,5 +1,11 @@
 package com.example.trypackagemanager.guardians_postnord;
 
+import android.location.Address;
+import android.location.Criteria;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
@@ -8,11 +14,18 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    private LatLng current;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,13 +47,43 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
      */
+
+    private ArrayList<String> stringAddresses = new ArrayList<>(Arrays.asList("Järnvägsgatan 35", "Test"));
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        current = new LatLng(56.062263, 12.709618);
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(current));
 
+        mMap.setOnMarkerClickListener(omcl);
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        MarkerOptions mo = new MarkerOptions();
+        /*mo.title(stringAddresses.get(i));
+        mMap.addMarker(mo);*/
+
     }
+
+    GoogleMap.OnMarkerClickListener omcl = new GoogleMap.OnMarkerClickListener() {
+        @Override
+        public boolean onMarkerClick(Marker marker) {
+
+
+            return false;
+        }
+    };
+
+    int i = 0;
+    private void onClick() throws IOException {
+        Geocoder geocoder = new Geocoder(this);
+        List<Address> addresses;
+        addresses = geocoder.getFromLocationName(stringAddresses.get(i), 1);
+        if(addresses.size() > 0) {
+            double lat = addresses.get(0).getLatitude();
+            double lng = addresses.get(0).getLongitude();
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(lat, lng)));
+        }
+        i++;
+    }
+
 }

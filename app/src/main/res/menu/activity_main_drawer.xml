@@ -4,34 +4,40 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
+
         <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="@string/menu_home" />
-        <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_map"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/menu_gallery" />
+            android:title="När kommer ditt paket?" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_slideshow" />
+            android:id="@+id/nav_guardian"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Guardian" />
         <item
-            android:id="@+id/nav_tools"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="@string/menu_tools" />
+            android:id="@+id/nav_parcel"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Tracka ditt paket" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title=" Måndag-Fredag 8:00-19:00">
         <menu>
             <item
                 android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="@string/menu_share" />
+                android:icon="@android:drawable/stat_sys_phone_call_forward"
+                android:title="Kontakta Oss" />
             <item
                 android:id="@+id/nav_send"
+                android:icon="@android:drawable/ic_dialog_email"
+                android:title="Maila Oss" />
+            <item
+                android:id="@+id/Facebook"
                 android:icon="@drawable/ic_menu_send"
-                android:title="@string/menu_send" />
+                android:title="Facebook" />
+            <item
+                android:id="@+id/webpage"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Hemsida" />
+
         </menu>
     </item>
 

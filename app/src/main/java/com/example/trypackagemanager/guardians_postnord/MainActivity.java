@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_guardian) {
             // Handle the camera action
         } else if (id == R.id.nav_map) {
-
+            System.out.println("bajs");
         } else if (id == R.id.Facebook) {
 
         } else if (id == R.id.webpage) {

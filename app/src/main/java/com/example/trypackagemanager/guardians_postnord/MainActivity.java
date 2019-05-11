@@ -2,11 +2,14 @@ package com.example.trypackagemanager.guardians_postnord;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -19,6 +22,10 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final int REQUEST_LOCATION = 321;
+    private static String customer;
+    private static String addressCustomer;
+    private static String name1, name2, name3, name4;
+    private static String address1, address2, address3, address4;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +43,36 @@ public class MainActivity extends AppCompatActivity
 
         /////////////////
         permission();
+
+        int SDK_INT = android.os.Build.VERSION.SDK_INT;
+        if (SDK_INT > 8)
+        {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                    .permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+            //your codes here
+            Database.getInstance().CustomerQuery();
+            Database.getInstance().GuardianQuery();
+
+            customer = Database.getInstance().getCustomer();
+            addressCustomer = Database.getInstance().getAddress();
+            name1 = Database.getInstance().name1;
+            name2 = Database.getInstance().name2;
+            name3 = Database.getInstance().name3;
+            name4 = Database.getInstance().name4;
+            address1 = Database.getInstance().address1;
+            address2 = Database.getInstance().address2;
+            address3 = Database.getInstance().address3;
+            address4 = Database.getInstance().address4;
+
+        }
+        System.out.println(customer + " " + addressCustomer);
+        System.out.println(name1 + " " + name2 + " " + name3 +" "+name4 +" "+ address1 +" "
+                + address2 +" " + address3 + " " +address4);
+
     }
+
+
 
     private void permission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
@@ -92,7 +128,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_guardian) {
             // Handle the camera action
         } else if (id == R.id.nav_map) {
-            System.out.println("bajs");
+
         } else if (id == R.id.Facebook) {
 
         } else if (id == R.id.webpage) {
@@ -107,4 +143,5 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }

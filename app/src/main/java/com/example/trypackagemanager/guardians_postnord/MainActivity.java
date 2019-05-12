@@ -162,7 +162,8 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_guardian) {
             // Handle the camera action
         } else if (id == R.id.nav_map) {
-
+            Intent intent = new Intent(this, MapsActivity.class);
+            startActivity(intent);
         } else if (id == R.id.Facebook) {
 
         } else if (id == R.id.webpage) {

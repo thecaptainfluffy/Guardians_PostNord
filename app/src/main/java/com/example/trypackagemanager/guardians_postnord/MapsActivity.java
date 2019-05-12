@@ -1,19 +1,17 @@
 package com.example.trypackagemanager.guardians_postnord;
 
 import android.location.Address;
-import android.location.Criteria;
 import android.location.Geocoder;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -35,10 +33,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        addmarker(mMap);
     }
-
-
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
@@ -49,58 +44,44 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * installed Google Play services and returned to the app.
      */
 
-    private ArrayList<String> stringAddresses = new ArrayList<>(Arrays.asList("Järnvägsgatan 35", "Test"));
-
+    private ArrayList<String> stringAddresses = new ArrayList<>(Arrays.asList("Järnvägsgatan 35", "Carl krooks 54", "Karlsgatan 4", "Hjälmhultsgatan 14" , "Rektorsgatan 20" ));
+    private ArrayList<LatLng> latLngs = new ArrayList<>();
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        current = new LatLng(56.062263, 12.709618);
+
+        Log.d("test","hej");
+        // Add a marker in Sydney and move the camera
+        current = new LatLng(56.027697, 12.708219);
         mMap.moveCamera(CameraUpdateFactory.newLatLng(current));
+        mMap.setMinZoomPreference(14);
+
+        Geocoder geocoder = new Geocoder(this);
+        for(String addr : stringAddresses) {
+            try {
+                List<Address> addresses = geocoder.getFromLocationName(addr, 1);
+                if (addresses.size() > 0) {
+                    double lat = addresses.get(0).getLatitude();
+                    double lng = addresses.get(0).getLongitude();
+                    MarkerOptions mo = new MarkerOptions();
+                    latLngs.add(new LatLng(lat, lng));
+                    mo.position(new LatLng(lat, lng));
+                    mo.title(addresses.get(0).getAddressLine(0));
+                    mMap.addMarker(mo);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
         mMap.setOnMarkerClickListener(omcl);
-        // Add a marker in Sydney and move the camera
-        MarkerOptions mo = new MarkerOptions();
-        /*mo.title(stringAddresses.get(i));
-        mMap.addMarker(mo);*/
-
-
     }
 
     GoogleMap.OnMarkerClickListener omcl = new GoogleMap.OnMarkerClickListener() {
         @Override
         public boolean onMarkerClick(Marker marker) {
-
-
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(marker.getPosition()));
             return false;
         }
     };
-
-    int i = 0;
-    private void onClick() throws IOException {
-        Geocoder geocoder = new Geocoder(this);
-        List<Address> addresses;
-        addresses = geocoder.getFromLocationName(stringAddresses.get(i), 1);
-        if(addresses.size() > 0) {
-            double lat = addresses.get(0).getLatitude();
-            double lng = addresses.get(0).getLongitude();
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(lat, lng)));
-        }
-        i++;
-    }
-
-    private Marker postnord;
-    private Marker förstadress;
-    private Marker andraadress;
-
-
-    public void addmarker(GoogleMap map){
-       postnord=map.addMarker(new MarkerOptions().position(new LatLng
-               (10,10)).title("Arne " +" Kontakt: 0734244419 "));
-
-       postnord.setTag(0);
-
-
-
-    }
-
 }

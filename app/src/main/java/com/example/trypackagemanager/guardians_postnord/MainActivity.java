@@ -20,6 +20,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 
 import com.google.android.gms.common.api.GoogleApiActivity;
@@ -97,6 +98,8 @@ public class MainActivity extends AppCompatActivity
             }
         });
   */
+
+        //getSupportActionBar().hide();
     }
 
 

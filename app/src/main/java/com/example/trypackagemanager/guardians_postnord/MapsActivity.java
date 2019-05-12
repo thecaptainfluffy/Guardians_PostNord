@@ -1,5 +1,6 @@
 package com.example.trypackagemanager.guardians_postnord;
 
+import android.graphics.BitmapFactory;
 import android.location.Address;
 import android.location.Geocoder;
 import android.support.v4.app.FragmentActivity;
@@ -10,6 +11,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
@@ -59,6 +62,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Geocoder geocoder = new Geocoder(this);
         for(String addr : stringAddresses) {
             try {
+
+
+
+
                 List<Address> addresses = geocoder.getFromLocationName(addr, 1);
                 if (addresses.size() > 0) {
                     double lat = addresses.get(0).getLatitude();
@@ -67,6 +74,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     latLngs.add(new LatLng(lat, lng));
                     mo.position(new LatLng(lat, lng));
                     mo.title(addresses.get(0).getAddressLine(0));
+                    mo.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+
                     mMap.addMarker(mo);
                 }
             } catch (IOException e) {

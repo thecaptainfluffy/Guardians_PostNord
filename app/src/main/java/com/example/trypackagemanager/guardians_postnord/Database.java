@@ -96,7 +96,6 @@ public class Database {
             name2 = resultSet.getString("name");
             address2 = resultSet.getString("address");
 
-
         }catch(Exception e){
             e.printStackTrace();
         }

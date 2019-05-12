@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 
+
         /////////////////
         permission();
 
@@ -81,7 +82,7 @@ public class MainActivity extends AppCompatActivity
 
 
 
-        final Button button = (Button) findViewById(R.id.nej);
+/*        final Button button = (Button) findViewById(R.id.nej);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String phonenumber="0734244419";
@@ -95,6 +96,7 @@ public class MainActivity extends AppCompatActivity
 
             }
         });
+  */
     }
 
 

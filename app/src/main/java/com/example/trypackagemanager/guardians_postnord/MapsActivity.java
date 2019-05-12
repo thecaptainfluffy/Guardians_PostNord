@@ -35,6 +35,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        addmarker(mMap);
     }
 
 
@@ -62,6 +63,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         /*mo.title(stringAddresses.get(i));
         mMap.addMarker(mo);*/
 
+
     }
 
     GoogleMap.OnMarkerClickListener omcl = new GoogleMap.OnMarkerClickListener() {
@@ -84,6 +86,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(lat, lng)));
         }
         i++;
+    }
+
+    private Marker postnord;
+    private Marker förstadress;
+    private Marker andraadress;
+
+
+    public void addmarker(GoogleMap map){
+       postnord=map.addMarker(new MarkerOptions().position(new LatLng
+               (10,10)).title("Arne " +" Kontakt: 0734244419 "));
+
+       postnord.setTag(0);
+
+
+
     }
 
 }

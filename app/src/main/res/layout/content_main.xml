@@ -27,21 +27,23 @@
             android:layout_height="486dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginTop="135dp"
-            android:layout_marginBottom="110dp"
+            android:layout_marginTop="117dp"
+            android:layout_marginBottom="128dp"
             android:gravity="center"
             android:text="Paket Lista" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/ja"
             android:layout_width="204dp"
             android:layout_height="106dp"
+            android:layout_alignParentTop="true"
             android:layout_alignParentBottom="true"
+            android:layout_marginTop="622dp"
             android:layout_marginBottom="3dp"
             android:text="Ja" />
 
         <Button
-            android:id="@+id/button5"
+            android:id="@+id/nej"
             android:layout_width="205dp"
             android:layout_height="109dp"
             android:layout_alignParentTop="true"
@@ -51,6 +53,18 @@
             android:layout_marginEnd="0dp"
             android:layout_marginBottom="0dp"
             android:text="Nej" />
+
+        <EditText
+            android:id="@+id/editText2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/ja"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="96dp"
+            android:layout_marginBottom="104dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Kan du ta emot paketet?" />
 
     </RelativeLayout>
 
